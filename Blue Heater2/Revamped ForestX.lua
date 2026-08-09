@@ -5,7 +5,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-  Title = "R-Forest",
+  Title = "Revamped ForestX",
   SubTitle = "by 001",
   TabWidth = 160,
   Size = UDim2.fromOffset(480, 380),
@@ -57,13 +57,14 @@ local DeleteBtn = ItemInfo.FmBottombar.BfDelete.TextButton
 local ConfirmBtn = InventoryUI.FmCharacter.FmItemInfo.FmDelete.FmBottombar.BfConfirm.TextButton
 
 Player.CharacterAdded:Connect(function()
+  twait(1)
   local New_Char = Player.Character or Player.CharacterAdded:Wait()
   
   PlayerGui = Player["PlayerGui"]
   Backpack = Player["Backpack"]
   Character = New_Char
-  Humanoid = FindFirstChildWhichIsA(New_Char, "Humanoid")
-  RootPart = FindFirstChildWhichIsA(New_Char, "HumanoidRootPart")
+  Humanoid = FindFirstChild(Character, "Humanoid")
+  RootPart = FindFirstChild(Character, "HumanoidRootPart")
 
   MainUI = PlayerGui.MainGui.FmMain
   InventoryUI = MainUI.FmInventory
@@ -126,36 +127,35 @@ do
     Virtual_Input:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
     twait(0.5)
     Virtual_Input:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+    twait(0.5)
   end
   
   function DeleteItem(Item_Name: string)
-    if not MainUI.Visible then MainUI.Visible = true end
-  
     for _, Items in next, QueryDescendants(ItemsUI, "Frame") do
       if Items.Name == Item_Name and Items:FindFirstChild("TextButton") then
+        if not MainUI.Visible then MainUI.Visible = true end
         local Button = Items:FindFirstChildOfClass("TextButton")
 
         Button.Visible = true
         UI_Service.SelectedObject = Button
         Click()
         
-        twait(0.5)
-          
         DeleteBtn.Visible = true
         UI_Service.SelectedObject = DeleteBtn
         Click()
         
-        twait(0.5)
-        
         ConfirmBtn.Visible = true
         UI_Service.SelectedObject = ConfirmBtn
         Click()
+        
+        UI_Service.SelectedObject = nil
       end
     end
   end
   
   function GetChest()
-    if not RootPart or RootPart == nil then return end
+    if not RootPart or RootPart == nil then end
+    if Fly.Parent ~= RootPart then Fly.Parent = RootPart end
     
     for _, Chest in next, QueryDescendants(Chests, "Model") do
       local Base = Chest:FindFirstChild("Circle.001")
