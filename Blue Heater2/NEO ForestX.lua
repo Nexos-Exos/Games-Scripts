@@ -143,9 +143,10 @@ do
   end
   
   function DeleteItem(Item_Name: string)
+    if not MainUI.Visible then MainUI.Visible = true end
+    
     for _, Items in next, QueryDescendants(ItemsUI, "Frame") do
       if Items.Name == Item_Name and Items:FindFirstChild("TextButton") then
-        if not MainUI.Visible then MainUI.Visible = true end
         local Button = Items:FindFirstChildOfClass("TextButton")
 
         Button.Visible = true
