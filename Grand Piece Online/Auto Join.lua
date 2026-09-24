@@ -17,7 +17,7 @@ local VirtualInput = GetService(game, "VirtualInputManager")
 local Genv = getgenv()
 local Configs = Genv.Settings
 
-local Player = FindFirstChildWhichIsA(game, "Players")
+local Player = FindFirstChildWhichIsA(game, "Players").LocalPlayer
 local PlayerGUI = Player.PlayerGui
 
 local ReplicatedStorage = FindFirstChildWhichIsA(game, "ReplicatedStorage")
