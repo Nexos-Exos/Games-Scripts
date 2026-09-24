@@ -10,9 +10,8 @@ local taskwait = task.wait
 local taskdelay = task.delay
 
 local FindFirstChildWhichIsA = game.FindFirstChildWhichIsA
-local GetService = game.GetService
-local UIService = GetService(game, "GuiService")
-local VirtualInput = GetService(game, "VirtualInputManager")
+local UIService = game:GetService(game, "GuiService")
+local VirtualInput = game:GetService(game, "VirtualInputManager")
 
 local Genv = getgenv()
 local Configs = Genv.Settings
